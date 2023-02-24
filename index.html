@@ -37,11 +37,12 @@
       });
 
       function handleButtonClick(color) {
+        console.log('handleButtonClick')
         if (simonGame.isPlaying) {
-          const playerSequence = simonGame.playerSequence;
-          playerSequence.push(color);
-          this.activate();
-          simonGame.checkAnswer(playerSequence);
+          simonGame.playerSequence.push(color);
+          // this.activate();
+          const ans = simonGame.checkAnswer(simonGame.playerSequence);
+          console.log('ans : ', ans)
         }
       }
 

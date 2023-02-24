@@ -13,6 +13,7 @@ class SimonGame {
     this.blueButton = new Button('blue', this.audioBlue);
 
     this.sequence = [];
+    this.playerSequence=[]
     this.level = 1;
     this.maxLevel = 20;
     this.isStrict = false;
@@ -28,13 +29,14 @@ class SimonGame {
   }
 
   generateSequence() {
-    for (let i = 0; i < this.maxLevel; i++) {
+    for (let i = 0; i < this.level; i++) {
       const randomColor = Math.floor(Math.random() * 4);
       this.sequence.push(randomColor);
     }
   }
 
   playSequence() {
+    console.log('==>', this.sequence)
     let i = 0;
     const interval = setInterval(() => {
       this.highlightButton(this.sequence[i]);
@@ -79,6 +81,7 @@ class SimonGame {
   }
 
   highlightButton(color) {
+    console.log('highlighted : ', color)
     const buttonColors = {
       0: 'green',
       1: 'red',
@@ -91,6 +94,6 @@ class SimonGame {
     buttonElement.classList.add('highlighted');
     setTimeout(() => {
       buttonElement.classList.remove('highlighted');
-    }, 500);
+    }, 900);
   }
 }

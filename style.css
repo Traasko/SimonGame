@@ -39,6 +39,22 @@
   #blue {
     background-color: #0000ff;
   }
+
+  #green.highlighted {
+    background-color: #7dff7d;
+  }
+  
+  #red.highlighted {
+    background-color: #ff8080;
+  }
+  
+  #yellow.highlighted {
+    background-color: #ffff80;
+  }
+  
+  #blue.highlighted {
+    background-color: #8080ff;
+  }
   
   .controls button {
     margin: 10px;
