@@ -1,64 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html>
+  <head>
+    <meta charset="UTF-8" />
     <title>Simon Game</title>
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="shortcut icon" href="./image/logo.png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-</head>
-<body>
-    <div class="container mt-3">
-        <button type="button" class="boutonStart" data-bs-toggle="modal" data-bs-target="#myModal">Règles</button>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Simon Game</h1>
+    <div class="simon-game">
+      <div class="buttons">
+        <button id="green"></button>
+        <button id="red"></button>
+        <button id="yellow"></button>
+        <button id="blue"></button>
       </div>
-      <div class="modal" id="myModal">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Voici quelques règles...</h4>
-              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-             <p>1. Appuyez sur le bouton START. Simon donnera le premier signal.</p> 
-             <p>2. Répétez le signal en appuyant sur la même lentille de couleur.</p>  
-             <p>3. Simon dupliquera le premier signal et en ajoutera un. </p> 
-             <p>4. Répétez ces deux signaux en appuyant sur les mêmes lentilles de couleur, dans l'ordre.</p>
-             <p>5. Simon dupliquera ces deux premiers signaux et en ajoutera un.</p>
-             <p>6. Continuez à jouer tant que vous pouvez répéter correctement chaque séquence de signaux.</p>
-             <p>7. Arrivé à la 10ème étapes Simon vous affichera un message de réussite.</p>
-             <p>7. Si vous ne répétez pas exactement une séquence, Simon répond avec un son "RAZZ". Cela signifie que vous avez perdu et que la séquence de signaux se termine.</p>
-             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Fermer</button>
-            </div>
-          </div>
-        </div>
+      <div class="controls">
+        <button id="start">Start</button>
+        <button id="strict">Strict</button>
       </div>
-    <main class="jeu">
-        <header>
-          <h1 class="titre js-titre">Simon Game</h1>
-        </header>
-      
-        <section class="couleurs js-couleurs pasClicker">
-          <div class="rouge" data-couleur="rouge"></div>
-          <div class="vert" data-couleur="vert"></div>
-          <div class="bleu" data-couleur="bleu"></div>
-          <div class="jaune" data-couleur="jaune"></div>
-        </section>
-      
-        <footer class="footer">
-          <button class="boutonStart js-start">Start</button>
-          <span class="span js-span hidden"></span>
-        </footer>
-      </main><div class="hidden">
-        <audio src="https://s3.amazonaws.com/freecodecamp/simonSound1.mp3" data-sound="rouge"></audio>
-        <audio src="https://s3.amazonaws.com/freecodecamp/simonSound2.mp3" data-sound="vert"></audio>
-        <audio src="https://s3.amazonaws.com/freecodecamp/simonSound3.mp3" data-sound="bleu"></audio>
-        <audio src="https://s3.amazonaws.com/freecodecamp/simonSound4.mp3" data-sound="jaune"></audio>
-      </div>
-      <script src="./js/index.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-</body>
+    </div>
+    <script src="./simon-game.js"></script>
+    <script src="./buttons.js"></script>
+    <script>
+      const simonGame = new SimonGame();
+      const greenButton = new Button("green");
+      const redButton = new Button("red");
+      const yellowButton = new Button("yellow");
+      const blueButton = new Button("blue");
+
+      document.getElementById("start").addEventListener("click", () => {
+        simonGame.start();
+      });
+
+      document.getElementById("strict").addEventListener("click", () => {
+        simonGame.toggleStrict();
+      });
+
+      function handleButtonClick(color) {
+        if (simonGame.isPlaying) {
+          const playerSequence = simonGame.playerSequence;
+          playerSequence.push(color);
+          this.activate();
+          simonGame.checkAnswer(playerSequence);
+        }
+      }
+
+      greenButton.element.addEventListener("click", handleButtonClick.bind(greenButton, 0));
+      redButton.element.addEventListener("click", handleButtonClick.bind(redButton, 1));
+      yellowButton.element.addEventListener("click", handleButtonClick.bind(yellowButton, 2));
+      blueButton.element.addEventListener("click", handleButtonClick.bind(blueButton, 3));
+    </script>
+  </body>
 </html>
