@@ -1,13 +1,12 @@
-const boutonStart = document.querySelector('.js-start');
-const span = document.querySelector('.js-span');
-const titre = document.querySelector('.js-titre');
-const couleurs = document.querySelector('.js-couleurs');
-
 class SimonGame {
   constructor() {
     this.let.suite = [];
     this.let.deuxiemeSuite = [];
     this.let.niveau = 0;
+    this.boutonStart = document.querySelector('.js-start');
+    this.span = document.querySelector('.js-span');
+    this.titre = document.querySelector('.js-titre');
+    this.couleurs = document.querySelector('.js-couleurs');
     this.prochainEtape = this.prochainEtape.bind(this);
     this.jouerTour = this.jouerTour.bind(this);
     this.debutPartie = this.debutPartie.bind(this);
